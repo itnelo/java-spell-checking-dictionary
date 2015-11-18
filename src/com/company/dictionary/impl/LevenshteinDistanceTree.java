@@ -79,6 +79,8 @@ public class LevenshteinDistanceTree
     // returns number of add/edit/delete operations required for equality.
     private int calcLevenshteinDistance(String first, String second) {
         int firstLength = first.length(), secondLength = second.length();
+        if (firstLength == 0) return secondLength;
+        if (secondLength == 0) return firstLength;
         int[] distFirst, distSecond = new int[secondLength + 1];
         for (int i = 0; i <= secondLength; ++i) {
             distSecond[i] = i;
