@@ -1,6 +1,6 @@
 package com.company.dictionary;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface DictionaryQueryResult {
 
@@ -10,7 +10,7 @@ public interface DictionaryQueryResult {
 
     DictionaryQueryResult.STATUS getStatus();
     void setStatus(DictionaryQueryResult.STATUS status);
-    ArrayList<Word> getSimilarWords();
-    void setSimilarWords(ArrayList<Word> similarWords);
+    List<Word> getSimilarWords();
+    void setSimilarWords(List<Word> similarWords);
 
 }

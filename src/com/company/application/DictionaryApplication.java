@@ -99,7 +99,7 @@ public enum DictionaryApplication
             state = StateHelper.STATE_SEARCH;
         }
         if (input.equals(CmdHelper.CMD_1)) {
-            ArrayList<Word> similarWords = dictionaryManager.lastResult().getSimilarWords();
+            List<Word> similarWords = dictionaryManager.lastResult().getSimilarWords();
             if (similarWords.isEmpty()) {
                 ui.showMessage(MessageHelper.t("WORD_NO_SIMILAR"));
                 state = StateHelper.STATE_SEARCH;

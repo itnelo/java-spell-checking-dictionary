@@ -2,13 +2,13 @@ package com.company.dictionary.impl;
 
 import com.company.dictionary.DictionaryQueryResult;
 import com.company.dictionary.Word;
-import java.util.ArrayList;
+import java.util.*;
 
 public class DictionaryQueryResultImpl
         implements DictionaryQueryResult
 {
     private DictionaryQueryResult.STATUS status;
-    private ArrayList<Word> similarWords;
+    private List<Word> similarWords;
 
     @Override
     public DictionaryQueryResult.STATUS getStatus() {
@@ -21,12 +21,12 @@ public class DictionaryQueryResultImpl
     }
 
     @Override
-    public ArrayList<Word> getSimilarWords() {
+    public List<Word> getSimilarWords() {
         return similarWords;
     }
 
     @Override
-    public void setSimilarWords(ArrayList<Word> similarWords) {
+    public void setSimilarWords(List<Word> similarWords) {
         this.similarWords = similarWords;
     }
 }

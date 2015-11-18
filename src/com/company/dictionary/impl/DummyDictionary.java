@@ -14,16 +14,14 @@ public class DummyDictionary
 
     public DummyDictionary() {
         words = new HashSet<>(Arrays.asList(
-                new WordImpl("Кот"),
-                new WordImpl("Кошка"),
-                new WordImpl("Кошмар"),
-                new WordImpl("Кошалот"),
-                new WordImpl("Королев"),
-                new WordImpl("Корова"),
-                new WordImpl("Корт"),
-                new WordImpl("Коран"),
-                new WordImpl("Книжка"),
-                new WordImpl("Кимано")
+                new WordImpl("book"),
+                new WordImpl("books"),
+                new WordImpl("cake"),
+                new WordImpl("boo"),
+                new WordImpl("cape"),
+                new WordImpl("boon"),
+                new WordImpl("cook"),
+                new WordImpl("cart")
         ));
     }
 

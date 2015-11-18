@@ -4,13 +4,24 @@ import com.company.dictionary.*;
 import com.company.dictionary.Dictionary;
 import java.util.*;
 
-public class DictionaryTreeImpl
+/**
+ * Simple tree realization for searching
+ * (comparing each sym of all dictionary words at fixed positions)
+ *
+ * Dictionary example:
+ * Car
+ * Cart
+ * Cartoon
+ * ...
+ */
+public class DictionarySymbolsTree
         implements DictionaryTree
 {
     private TreeNode head;
     private ArrayList<Word> index;
     private LinkedHashMap<Integer, Integer> similarMap;
     private Integer dictionarySize;
+    private Word lastSearchWord;
 
     /**
      * точность подбора похожих слов, сколько ошибок подряд допустимо.
@@ -19,11 +30,12 @@ public class DictionaryTreeImpl
      * выше значение – дольше работа, точнее результат,
      * глубже проходим – более полно заполняем массив совпадений символов ( similarMap )
      */
-    private static final int MISTAKES_IN_SEQUENCE_AVAILABLE = 3;
+    private static final int MISTAKES_IN_SEQUENCE_AVAILABLE = 5;
 
-    public DictionaryTreeImpl() {
+    public DictionarySymbolsTree() {
         head = new TreeNode();
         index = new ArrayList<>();
+        lastSearchWord = new WordImpl("");
     }
 
     @Override
@@ -46,16 +58,17 @@ public class DictionaryTreeImpl
 
     @Override
     public boolean search(Word word) {
+        lastSearchWord = word;
         similarMap = new LinkedHashMap<>(dictionarySize, 0.75f, true);
         String wordString = word.toString();
         return searchInternal(wordString, 0, head, MISTAKES_IN_SEQUENCE_AVAILABLE);
     }
 
     @Override
-    public ArrayList<Word> getSimilarWords(int limit, String queryWord) {
+    public ArrayList<Word> getSimilarWords(int limit) {
         ArrayList<Word> similarWords = new ArrayList<>();
         List<Map.Entry<Integer, Integer>> similarWordsList = new LinkedList<>();
-        int queryWordLength = queryWord.length();
+        int queryWordLength = lastSearchWord.toString().length();
         for (Iterator<Map.Entry<Integer, Integer>> iter = similarMap.entrySet().iterator(); iter.hasNext();) {
             Map.Entry<Integer, Integer> entry = iter.next();
             String similarityWord = index.get(entry.getKey()).toString();

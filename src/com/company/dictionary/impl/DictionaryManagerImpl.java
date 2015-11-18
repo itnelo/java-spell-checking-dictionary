@@ -14,7 +14,7 @@ public class DictionaryManagerImpl
 
     public DictionaryManagerImpl() {
         dictionaries = new HashMap<>();
-        currentDictionaryTree = new DictionaryTreeImpl();
+        currentDictionaryTree = new LevenshteinDistanceTree();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class DictionaryManagerImpl
         result.setStatus(exists
                 ? DictionaryQueryResult.STATUS.SUCCESS
                 : DictionaryQueryResult.STATUS.FAIL);
-        result.setSimilarWords(currentDictionaryTree.getSimilarWords(SIMILARITY_LIMIT, query.getWord().toString()));
+        result.setSimilarWords(currentDictionaryTree.getSimilarWords(SIMILARITY_LIMIT));
         return (lastResult = result);
     }
 
