@@ -78,17 +78,28 @@ public class LevenshteinDistanceTree
 
     // returns number of add/edit/delete operations required for equality.
     private int calcLevenshteinDistance(String first, String second) {
-        int firstLength = first.length();
-        int secondLength = second.length();
-        int maxLength = Integer.min(firstLength, secondLength);
-        int editOperations = 0;
-        for (int index = 0; index < maxLength; ++index) {
-            Character ch1 = Character.toLowerCase(first.charAt(index));
-            Character ch2 = Character.toLowerCase(second.charAt(index));
-            if (! ch1.equals(ch2)) ++editOperations;
+        int firstLength = first.length(), secondLength = second.length();
+        int[] distFirst, distSecond = new int[secondLength + 1];
+        for (int i = 0; i <= secondLength; ++i) {
+            distSecond[i] = i;
         }
-        // edit actions number + add/delete actions number
-        return (editOperations + Math.abs(firstLength - secondLength));
+        for (int i = 1; i <= firstLength; ++i) {
+            distFirst = distSecond;
+            distSecond = new int[secondLength + 1];
+            for (int j = 0; j <= secondLength; ++j) {
+                if (j == 0) distSecond[j] = i;
+                else {
+                    int cost = (first.charAt(i - 1) != second.charAt(j - 1)) ? 1 : 0;
+                    if (distSecond[j - 1] < distFirst[j] && distSecond[j - 1] < distFirst[j - 1] + cost)
+                        distSecond[j] = distSecond[j - 1] + 1;
+                    else if (distFirst[j] < distFirst[j - 1] + cost)
+                        distSecond[j] = distFirst[j] + 1;
+                    else
+                        distSecond[j] = distFirst[j - 1] + cost;
+                }
+            }
+        }
+        return distSecond[secondLength];
     }
 
     @Override
