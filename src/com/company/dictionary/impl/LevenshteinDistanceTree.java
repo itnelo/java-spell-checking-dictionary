@@ -8,6 +8,7 @@ import java.util.*;
 /**
  * BK-Tree implementation
  * using Levenshtein distance
+ * https://en.wikipedia.org/wiki/Levenshtein_distance
  */
 public class LevenshteinDistanceTree
         implements DictionaryTree
