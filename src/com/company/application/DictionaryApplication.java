@@ -82,7 +82,7 @@ public enum DictionaryApplication
         double searchDuration = (System.nanoTime() - startTime) / 1000000.0;
         ui.showMessage(MessageHelper.t("TIME_ELAPSED") + searchDuration);
         if (result.getStatus().equals(DictionaryQueryResult.STATUS.SUCCESS)) {
-            ui.showMessage(MessageHelper.t("WORD_EXISTS") + dictionaryManager.lastResult().getSimilarWords().get(0));
+            ui.showMessage(MessageHelper.t("WORD_EXISTS") + dictionaryManager.lastResult().getMatchWord());
         } else {
             state = StateHelper.STATE_NOT_FOUND;
         }

@@ -58,20 +58,16 @@ public class LevenshteinDistanceTree
     private boolean searchInternal(String wordString, TreeNode node) {
         int levenshteinDistance = calcLevenshteinDistance(wordString, node.getValue());
         if (levenshteinDistance <= ERROR_MAX_COUNT) {
-            lastSearchSimilarWords.addFirst(new WordImpl(node.getValue()));
+            lastSearchSimilarWords.addLast(new WordImpl(node.getValue()));
         }
         if (levenshteinDistance == 0) return true;
         int downIndex = Integer.max(1, levenshteinDistance - ERROR_MAX_COUNT);
         int upIndex = levenshteinDistance + ERROR_MAX_COUNT;
-        List<Boolean> recursiveCallResults = new LinkedList<>();
         for (int index = downIndex; index <= upIndex; ++index) {
             TreeNode childNode = node.getChild(index);
-            if (childNode != null) {
-                recursiveCallResults.add(searchInternal(wordString, node.getChild(index)));
+            if (childNode != null && searchInternal(wordString, childNode)) {
+                return true;
             }
-        }
-        for (Boolean result : recursiveCallResults) {
-            if (result.equals(Boolean.TRUE)) return true;
         }
         return false;
     }

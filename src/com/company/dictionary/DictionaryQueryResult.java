@@ -11,6 +11,7 @@ public interface DictionaryQueryResult {
     DictionaryQueryResult.STATUS getStatus();
     void setStatus(DictionaryQueryResult.STATUS status);
     List<Word> getSimilarWords();
+    Word getMatchWord();
     void setSimilarWords(List<Word> similarWords);
 
 }

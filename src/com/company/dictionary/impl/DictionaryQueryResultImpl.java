@@ -26,6 +26,13 @@ public class DictionaryQueryResultImpl
     }
 
     @Override
+    public Word getMatchWord() {
+        return (similarWords.size() > 0)
+                ? similarWords.get(similarWords.size() - 1)
+                : null;
+    }
+
+    @Override
     public void setSimilarWords(List<Word> similarWords) {
         this.similarWords = similarWords;
     }
