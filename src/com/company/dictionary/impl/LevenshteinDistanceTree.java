@@ -15,7 +15,7 @@ public class LevenshteinDistanceTree
 {
     private TreeNode root;
     private LinkedList<Word> lastSearchSimilarWords;
-    private static final int ERROR_MAX_COUNT = 2;
+    private static final int ERROR_MAX_COUNT = 1;
 
     public LevenshteinDistanceTree() {
         lastSearchSimilarWords = new LinkedList<>();

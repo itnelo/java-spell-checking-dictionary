@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.application.DictionaryApplication;
+import com.company.application.impl.DictionaryApplication;
 
 public class Main {
     public static void main(String[] args) {

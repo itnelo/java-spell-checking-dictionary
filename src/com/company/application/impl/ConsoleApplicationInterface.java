@@ -1,5 +1,7 @@
-package com.company.application;
+package com.company.application.impl;
 
+import com.company.application.ApplicationInterface;
+import com.company.helpers.CmdHelper;
 import com.company.helpers.MessageHelper;
 
 import java.io.BufferedReader;
@@ -18,18 +20,25 @@ public enum ConsoleApplicationInterface
     }
 
     @Override
-    public void showMessage(String message) {
+    public ApplicationInterface showMessage(String message) {
         System.out.println(message);
+        return this;
     }
 
     @Override
-    public void showError(String errorMessage) {
+    public ApplicationInterface showError(String errorMessage) {
         System.err.println(errorMessage);
+        return this;
     }
 
     @Override
-    public String getInput() throws IOException {
-        return inputReader.readLine();
+    public String getInput() {
+        try {
+            return inputReader.readLine();
+        } catch (Exception e) {
+            showError(e.getMessage());
+            return CmdHelper.CMD_EXIT;
+        }
     }
 
     public void free() {
